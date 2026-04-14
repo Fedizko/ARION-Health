@@ -2,7 +2,7 @@
 
 > *"Se não funciona em um dia de crise de fadiga, não está pronto."*
 
-ARIAN é uma plataforma MVP de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
+ARION é uma plataforma MVP de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
 
 O nome **Arian** vem do galês para *prata* — referência ao sistema de recompensas e à comunidade zebra das doenças raras.
 
