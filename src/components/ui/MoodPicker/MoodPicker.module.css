@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  gap: var(--space-sm);
+  background: var(--color-bg-raised);
+  border-radius: var(--radius-full);
+  padding: var(--space-xs);
+}
+
+.option {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.option:hover {
+  background: var(--color-border);
+}
+
+.option.selected {
+  background: var(--color-bg-card);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  transform: scale(1.1);
+}
+
+.emoji {
+  font-size: 24px;
+  line-height: 1;
+  pointer-events: none;
+}

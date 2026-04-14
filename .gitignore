@@ -1,0 +1,43 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+dist-ssr/
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PWA gerado
+public/sw.js
+public/workbox-*.js
+
+# Instruções internas — não versionar
+CLAUDE.md
+
+# Imagens de referência do design (Figma / WhatsApp)
+*.jpeg
+*.jpg
+!public/assets/*.jpg
+!public/assets/*.jpeg

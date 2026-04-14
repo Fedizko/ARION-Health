@@ -1,0 +1,84 @@
+/* ===========================
+   ARION Health — Animações
+   =========================== */
+
+/* Arion Glow Prata — ativo ao atingir streak de 5 dias */
+@keyframes arionGlowSilver {
+  0%, 100% {
+    box-shadow:
+      0 0 8px  var(--color-silver-glow),
+      0 0 16px rgba(192, 192, 192, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 24px var(--color-silver-glow),
+      0 0 48px rgba(192, 192, 192, 0.4),
+      0 0 80px rgba(192, 192, 192, 0.15);
+  }
+}
+
+/* Arion Glow Ouro — ativo ao atingir streak de 30 dias */
+@keyframes arionGlowGold {
+  0%, 100% {
+    box-shadow:
+      0 0 8px  var(--color-gold-glow),
+      0 0 16px rgba(255, 215, 0, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 24px var(--color-gold-glow),
+      0 0 48px rgba(255, 215, 0, 0.4),
+      0 0 80px rgba(255, 215, 0, 0.15);
+  }
+}
+
+/* Status Pulse — feedback ao registrar */
+@keyframes statusPulse {
+  0%   { transform: scale(1);    opacity: 1; }
+  50%  { transform: scale(1.08); opacity: 0.9; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+/* Fade In Up — entrada de cards */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Halftone Shimmer — textura de pétala */
+@keyframes halftoneShimmer {
+  0%   { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Spin — loading indicator */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Slide In Right — transição de sub-tabs */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ===========================
+   Classes Utilitárias de Animação
+   =========================== */
+
+.animate-fadeInUp {
+  animation: fadeInUp var(--transition-normal) ease both;
+}
+
+.animate-pulse {
+  animation: statusPulse 300ms ease;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-slideInRight {
+  animation: slideInRight var(--transition-normal) ease both;
+}

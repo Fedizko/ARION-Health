@@ -1,0 +1,41 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  color: var(--color-text-muted);
+  font: 500 14px/1 var(--font-body);
+  min-height: var(--touch-min);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.option:hover {
+  border-color: var(--color-text-subtle);
+  color: var(--color-text);
+}
+
+.option.active {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  font-size: 14px;
+}

@@ -1,0 +1,22 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.svg {
+  display: block;
+}
+
+.icon {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}

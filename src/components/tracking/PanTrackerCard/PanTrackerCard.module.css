@@ -1,0 +1,26 @@
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: fadeInUp var(--transition-normal) ease both;
+}
+
+.gaugeWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.description {
+  font: 400 12px/1.5 var(--font-body);
+  color: var(--color-text-muted);
+  text-align: center;
+}

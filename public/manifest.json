@@ -1,0 +1,26 @@
+{
+  "name": "ARION Health",
+  "short_name": "ARION",
+  "description": "Monitoramento inteligente para doenças crônicas e raras",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#CAFF00",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "categories": ["health", "medical"],
+  "icons": [
+    {
+      "src": "/assets/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

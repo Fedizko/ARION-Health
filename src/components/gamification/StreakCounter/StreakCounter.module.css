@@ -1,0 +1,34 @@
+.counter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-raised);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.days {
+  font: 700 16px/1 var(--font-display);
+  color: var(--color-text);
+}
+
+.message {
+  font: 400 12px/1 var(--font-body);
+  color: var(--color-text-muted);
+}

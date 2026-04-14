@@ -1,0 +1,36 @@
+.page {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.header { display: flex; flex-direction: column; gap: var(--space-xs); }
+
+.title {
+  font: 700 24px/1.2 var(--font-display);
+  color: var(--color-text);
+}
+
+.subtitle {
+  font: 400 14px/1 var(--font-body);
+  color: var(--color-text-muted);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sectionTitle {
+  font: 600 16px/1 var(--font-display);
+  color: var(--color-text);
+}
+
+.loading, .empty {
+  font: 400 14px/1 var(--font-body);
+  color: var(--color-text-muted);
+  padding: var(--space-xl) 0;
+  text-align: center;
+}

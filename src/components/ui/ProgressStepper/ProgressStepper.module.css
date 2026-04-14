@@ -1,0 +1,48 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.stepWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.circle {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-border);
+  background: var(--color-bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: all var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.circle.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+  box-shadow: 0 0 0 3px rgba(202, 255, 0, 0.2);
+}
+
+.circle.done {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: #000;
+}
+
+.line {
+  width: 40px;
+  height: 2px;
+  background: var(--color-border);
+  transition: background var(--transition-normal);
+}
+
+.lineDone {
+  background: var(--color-accent);
+}
