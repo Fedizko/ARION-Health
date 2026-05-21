@@ -17,25 +17,35 @@ export function Register() {
     confirmPassword:'',
     updates:        false,
   })
-  const [error, setError] = useState('')
+  const [error,   setError]   = useState('')
+  const [info,    setInfo]    = useState('')
+  const [loading, setLoading] = useState(false)
 
   const set = (field, value) => setForm(prev => ({ ...prev, [field]: value }))
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    setInfo('')
 
     if (!form.displayName.trim()) { setError('Informe seu nome.'); return }
     if (!form.email.includes('@')) { setError('E-mail inválido.'); return }
     if (form.password.length < 6)  { setError('Senha com mínimo 6 caracteres.'); return }
     if (form.password !== form.confirmPassword) { setError('As senhas não conferem.'); return }
 
-    handleRegister({
+    setLoading(true)
+    const result = await handleRegister({
       displayName: form.displayName.trim(),
       email:       form.email.trim().toLowerCase(),
       password:    form.password,
-      updates:     form.updates,
     })
+    setLoading(false)
+
+    if (!result.ok) {
+      setError(result.error || 'Não foi possível cadastrar. Tente novamente.')
+    } else if (result.needsConfirmation) {
+      setInfo('Cadastro criado! Confirme o e-mail enviado e depois faça login.')
+    }
   }
 
   return (
@@ -111,13 +121,14 @@ export function Register() {
                 checked={form.updates}
                 onChange={e => set('updates', e.target.checked)}
               />
-              <span>Desejo receber atualizações da Arion</span>
+              <span>Desejo receber atualizações da Arian</span>
             </label>
 
             {error && <p className={styles.error} role="alert">{error}</p>}
+            {info && <p className={styles.error} style={{ color: 'var(--color-accent, #CAFF00)' }} role="status">{info}</p>}
 
-            <button type="submit" className={styles.submitBtn}>
-              cadastre-se
+            <button type="submit" className={styles.submitBtn} disabled={loading}>
+              {loading ? 'Enviando…' : 'cadastre-se'}
             </button>
           </form>
 

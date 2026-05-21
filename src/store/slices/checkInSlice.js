@@ -1,5 +1,5 @@
 /**
- * checkInSlice — Estado da sessão de check-in do dia
+ * checkInSlice — Estado da sessão de check-in do dia.
  */
 
 import { saveCheckIn, getTodayCheckIn } from '../../utils/persistence'
@@ -16,27 +16,30 @@ const DEFAULT_VALUES = {
 }
 
 export const createCheckInSlice = (set, get) => ({
-  // Estado de check-in em andamento
-  draft:       { ...DEFAULT_VALUES },
+  draft:        { ...DEFAULT_VALUES },
   isSubmitting: false,
   submitError:  null,
   todayCheckIn: null,
   dailyStatus:  'none',
   activeSubTab: 'pantracker',
 
-  // Inicializar com dados do dia
-  initCheckIn: () => {
-    const today = getTodayCheckIn()
+  initCheckIn: async () => {
+    const today = await getTodayCheckIn()
     if (today) {
       set({
         todayCheckIn: today,
         draft: { ...DEFAULT_VALUES, ...today },
         dailyStatus: getDailyStatus(today),
       })
+    } else {
+      set({
+        todayCheckIn: null,
+        draft: { ...DEFAULT_VALUES },
+        dailyStatus: 'none',
+      })
     }
   },
 
-  // Atualizar campo do draft
   setDraftField: (field, value) => {
     set(state => {
       const draft = { ...state.draft, [field]: value }
@@ -44,7 +47,6 @@ export const createCheckInSlice = (set, get) => ({
     })
   },
 
-  // Alternar sintoma no draft
   toggleSymptom: (symptomId) => {
     set(state => {
       const symptoms = state.draft.symptoms ?? []
@@ -55,20 +57,22 @@ export const createCheckInSlice = (set, get) => ({
     })
   },
 
-  // Submeter check-in
-  submitCheckIn: () => {
+  submitCheckIn: async () => {
     set({ isSubmitting: true, submitError: null })
     try {
       const draft = get().draft
-      saveCheckIn(draft)
+      const saved = await saveCheckIn(draft)
+      if (!saved) {
+        set({ isSubmitting: false, submitError: 'Falha ao salvar check-in.' })
+        return false
+      }
       set({
-        todayCheckIn: { ...draft, date: new Date().toISOString().split('T')[0] },
+        todayCheckIn: saved,
         isSubmitting: false,
-        dailyStatus:  getDailyStatus(draft),
+        dailyStatus:  getDailyStatus(saved),
       })
-      // Disparar recálculo do streak
-      get().computeStreak?.()
-      get().loadCheckIns?.()
+      await get().computeStreak?.()
+      await get().loadCheckIns?.()
       return true
     } catch (err) {
       set({ isSubmitting: false, submitError: err.message })
@@ -76,6 +80,5 @@ export const createCheckInSlice = (set, get) => ({
     }
   },
 
-  // Trocar sub-tab ativa
   setActiveSubTab: (tab) => set({ activeSubTab: tab }),
 })

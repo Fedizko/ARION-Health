@@ -1,5 +1,5 @@
 /**
- * profileSlice — Perfil e configurações do usuário
+ * profileSlice — Perfil do usuário (tabela profiles no Supabase).
  */
 
 import { saveProfile, getProfile } from '../../utils/persistence'
@@ -9,8 +9,8 @@ export const createProfileSlice = (set, get) => ({
   conditions:  [],
   avatarUrl:   null,
 
-  initProfile: () => {
-    const profile = getProfile()
+  initProfile: async () => {
+    const profile = await getProfile()
     if (profile) {
       set({
         displayName: profile.displayName ?? '',
@@ -20,14 +20,14 @@ export const createProfileSlice = (set, get) => ({
     }
   },
 
-  updateProfile: (partial) => {
+  updateProfile: async (partial) => {
     const current = {
       displayName: get().displayName,
       conditions:  get().conditions,
       avatarUrl:   get().avatarUrl,
     }
     const updated = { ...current, ...partial }
-    saveProfile(updated)
-    set(updated)
+    const saved   = await saveProfile(updated)
+    if (saved) set(saved)
   },
 })

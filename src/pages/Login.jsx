@@ -12,12 +12,15 @@ export function Login() {
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
   const [error,    setError]    = useState('')
+  const [loading,  setLoading]  = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    const ok = handleLogin(email.trim().toLowerCase(), password)
-    if (!ok) setError('E-mail ou senha incorretos.')
+    setLoading(true)
+    const result = await handleLogin(email.trim().toLowerCase(), password)
+    setLoading(false)
+    if (!result.ok) setError(translateAuthError(result.error))
   }
 
   return (
@@ -25,7 +28,7 @@ export function Login() {
       <div className={styles.card}>
         <div className={styles.logoWrapper}>
           <span className={styles.logoPlus}>+</span>
-          <span className={styles.logoText}>arion</span>
+          <span className={styles.logoText}>arian</span>
         </div>
 
         <h1 className={styles.title}>Bem-vinda de volta</h1>
@@ -53,8 +56,8 @@ export function Login() {
 
           {error && <p className={styles.error} role="alert">{error}</p>}
 
-          <button type="submit" className={styles.submitBtn}>
-            Entrar
+          <button type="submit" className={styles.submitBtn} disabled={loading}>
+            {loading ? 'Entrando…' : 'Entrar'}
           </button>
         </form>
 
@@ -65,4 +68,12 @@ export function Login() {
       </div>
     </div>
   )
+}
+
+function translateAuthError(msg = '') {
+  const m = msg.toLowerCase()
+  if (m.includes('invalid login') || m.includes('invalid credentials')) return 'E-mail ou senha incorretos.'
+  if (m.includes('email not confirmed')) return 'Confirme seu e-mail antes de entrar.'
+  if (m.includes('rate limit')) return 'Muitas tentativas. Aguarde alguns segundos.'
+  return msg || 'Não foi possível entrar. Tente novamente.'
 }

@@ -1,5 +1,5 @@
 /**
- * historySlice — Histórico de check-ins
+ * historySlice — Lista de check-ins do usuário (origem: Supabase).
  */
 
 import { getCheckIns } from '../../utils/persistence'
@@ -7,8 +7,8 @@ import { getCheckIns } from '../../utils/persistence'
 export const createHistorySlice = (set) => ({
   checkIns: [],
 
-  loadCheckIns: () => {
-    const checkIns = getCheckIns()
+  loadCheckIns: async () => {
+    const checkIns = await getCheckIns()
     set({ checkIns })
   },
 })
