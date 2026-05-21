@@ -1,8 +1,8 @@
-# ✦ ARION Health — Plataforma de Monitoramento Inteligente
+# ✦ ARIAN Health — Plataforma de Monitoramento Inteligente
 
 > *"Se não funciona em um dia de crise de fadiga, não está pronto."*
 
-ARION é uma plataforma MVP de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
+ARIAN é uma plataforma MVP de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
 
 O nome **Arian** vem do galês para *prata* — referência ao sistema de recompensas e à comunidade zebra das doenças raras.
 
@@ -13,8 +13,8 @@ O nome **Arian** vem do galês para *prata* — referência ao sistema de recomp
 ### 1. Semáforo Visual
 Interface dinâmica que traduz dados inseridos em cores universais (**Verde / Amarelo / Vermelho**) instantaneamente. Zero interpretação, zero carga cognitiva.
 
-### 2. Arion Star ✦
-Sistema de streaks e badges prateados. Após **5 dias consecutivos** de registro, o usuário desbloqueia a Arion Star — efeito visual de brilho prateado via CSS keyframes.
+### 2. Arian Star ✦
+Sistema de streaks e badges prateados. Após **5 dias consecutivos** de registro, o usuário desbloqueia a Arian Star — efeito visual de brilho prateado via CSS keyframes.
 
 ### 3. Módulo de Doenças Raras
 Campos personalizáveis para SED, Fibromialgia, SAMA, Disautonomia e outras condições. Dashboard exportável para compartilhar histórico com médicos.
@@ -93,7 +93,7 @@ Tech level: Baixo/moderado
 --color-yellow:    #EAB308    /* Atenção */
 --color-red:       #EF4444    /* Crise */
 
-/* Arion Star */
+/* Arian Star */
 --color-silver:    #C0C0C0    /* Prata — streak ativo */
 --color-gold:      #FFD700    /* Ouro — streak premium */
 ```
@@ -128,7 +128,7 @@ Tech level: Baixo/moderado
 ## Estrutura do Projeto
 
 ```
-arion-health/
+arian-health/
 ├── public/
 │   ├── favicon.ico            # Ícone 4 pétalas neon
 │   ├── manifest.json          # PWA manifest

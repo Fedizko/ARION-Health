@@ -6,7 +6,7 @@
 
 .silver {
   color: var(--color-silver);
-  animation: arionGlowSilver 2s ease-in-out infinite;
+  animation: arianGlowSilver 2s ease-in-out infinite;
   text-shadow:
     0 0 8px  var(--color-silver-glow),
     0 0 16px rgba(192, 192, 192, 0.3);
@@ -14,7 +14,7 @@
 
 .gold {
   color: var(--color-gold);
-  animation: arionGlowGold 2s ease-in-out infinite;
+  animation: arianGlowGold 2s ease-in-out infinite;
   text-shadow:
     0 0 8px  var(--color-gold-glow),
     0 0 16px rgba(255, 215, 0, 0.3);

@@ -10,7 +10,7 @@ import styles               from './Onboarding.module.css'
 
 const STEPS = [
   {
-    title:    'Bem-vinda à Arion',
+    title:    'Bem-vinda à Arian',
     content:  'Seu companheiro de saúde para dias difíceis e dias bons.',
   },
   {
@@ -52,7 +52,7 @@ export function Onboarding() {
   return (
     <div className={styles.page}>
       <div className={styles.logo}>
-        <span className={styles.logoPlus}>+</span>arion
+        <span className={styles.logoPlus}>+</span>arian
       </div>
 
       <div className={styles.content}>

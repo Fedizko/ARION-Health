@@ -40,7 +40,7 @@ export function generateMedicalReport({ days = 30 } = {}) {
     <html lang="pt-BR">
     <head>
       <meta charset="UTF-8" />
-      <title>Relatório ARION — ${name}</title>
+      <title>Relatório ARIAN — ${name}</title>
       <style>
         body { font-family: sans-serif; font-size: 12px; color: #000; background: #fff; }
         h1 { font-size: 20px; margin-bottom: 4px; }
@@ -54,7 +54,7 @@ export function generateMedicalReport({ days = 30 } = {}) {
       </style>
     </head>
     <body>
-      <h1>Relatório de Saúde — ARION Health</h1>
+      <h1>Relatório de Saúde — ARIAN Health</h1>
       <h2>Gerado em ${formatDate(new Date().toISOString().split('T')[0])} • Últimos ${days} dias</h2>
       <div class="header-info">
         <span><strong>Paciente:</strong> ${name}</span>

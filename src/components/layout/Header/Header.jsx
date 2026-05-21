@@ -23,7 +23,7 @@ export function Header() {
         onClick={() => navigate('/registro')}
         aria-label="Ir para início"
       >
-        <span className={styles.logoPlus}>+</span>arion
+        <span className={styles.logoPlus}>+</span>arian
       </button>
 
       <div className={styles.actions}>

@@ -1,9 +1,9 @@
 /* ===========================
-   ARION Health — Animações
+   ARIAN Health — Animações
    =========================== */
 
-/* Arion Glow Prata — ativo ao atingir streak de 5 dias */
-@keyframes arionGlowSilver {
+/* Arian Glow Prata — ativo ao atingir streak de 5 dias */
+@keyframes arianGlowSilver {
   0%, 100% {
     box-shadow:
       0 0 8px  var(--color-silver-glow),
@@ -17,8 +17,8 @@
   }
 }
 
-/* Arion Glow Ouro — ativo ao atingir streak de 30 dias */
-@keyframes arionGlowGold {
+/* Arian Glow Ouro — ativo ao atingir streak de 30 dias */
+@keyframes arianGlowGold {
   0%, 100% {
     box-shadow:
       0 0 8px  var(--color-gold-glow),

@@ -1,5 +1,5 @@
 /**
- * useStore — Store Zustand central do ARION Health
+ * useStore — Store Zustand central do ARIAN Health
  * Compõe todas as slices de domínio
  */
 

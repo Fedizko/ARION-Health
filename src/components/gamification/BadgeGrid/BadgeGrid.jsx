@@ -29,9 +29,9 @@ export function BadgeGrid({ totalCheckIns = 0 }) {
           >
             <div className={styles.icon}>
               {badge.icon === 'star-silver' ? (
-                <ArianStar status={unlocked ? 'ARION_SILVER' : 'none'} size={24} />
+                <ArianStar status={unlocked ? 'ARIAN_SILVER' : 'none'} size={24} />
               ) : badge.icon === 'star-gold' ? (
-                <ArianStar status={unlocked ? 'ARION_GOLD' : 'none'} size={24} />
+                <ArianStar status={unlocked ? 'ARIAN_GOLD' : 'none'} size={24} />
               ) : (
                 <span className={styles.emoji}>{badge.icon}</span>
               )}

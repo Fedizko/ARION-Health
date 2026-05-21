@@ -1,4 +1,4 @@
-/** Constantes globais do ARION Health */
+/** Constantes globais do ARIAN Health */
 
 // Gamificação
 export const STREAK_THRESHOLD_SILVER = 5    // dias → Orion Star (prata)
@@ -6,11 +6,11 @@ export const STREAK_THRESHOLD_GOLD   = 30   // dias → Orion Gold
 
 // Chaves do LocalStorage
 export const STORAGE_KEYS = {
-  checkIns:      'arion_check_ins',
-  userProfile:   'arion_user_profile',
-  settings:      'arion_settings',
-  streakCache:   'arion_streak_cache',
-  accessibility: 'arion_accessibility',
+  checkIns:      'arian_check_ins',
+  userProfile:   'arian_user_profile',
+  settings:      'arian_settings',
+  streakCache:   'arian_streak_cache',
+  accessibility: 'arian_accessibility',
 }
 
 // Módulos de monitoramento do Pan Tracker
