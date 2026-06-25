@@ -52,7 +52,7 @@ export function Register() {
     <div className={styles.page}>
       {/* Metade esquerda — imagem */}
       <div className={styles.imagePanel}>
-        <img src="/assets/zebra.jpg" alt="Zebra — símbolo do EDS" className={styles.zebra} />
+        <img src="/assets/zebra.png" alt="Zebra — símbolo do EDS" className={styles.zebra} />
         <div className={styles.imageOverlay} />
       </div>
 
