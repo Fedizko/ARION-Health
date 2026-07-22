@@ -2,9 +2,11 @@
 
 > *"Se não funciona em um dia de crise de fadiga, não está pronto."*
 
-ARIAN é uma plataforma MVP de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
+ARIAN é uma plataforma de monitoramento de saúde para pessoas com doenças crônicas e raras. Usa **Design Cognitivo** e **Gamificação Utilitária** para tornar o autocuidado simples, rápido e motivador — mesmo nos dias mais difíceis.
 
 O nome **Arian** vem do galês para *prata* — referência ao sistema de recompensas e à comunidade zebra das doenças raras.
+
+**Deploy:** [arion-health-9142.vercel.app](https://arion-health-9142.vercel.app)
 
 ---
 
@@ -35,43 +37,183 @@ Campos personalizáveis para SED, Fibromialgia, SAMA, Disautonomia e outras cond
 ## Stack Tecnológica
 
 ### Front-end
-```
-React 18          → Componentização, estados reativos
-JavaScript ES2022 → Lógica de gamificação, LocalStorage
-HTML5 semântico   → Acessibilidade, inputs grandes, ARIA
-CSS3              → Variáveis CSS, Flexbox/Grid, animações
-PWA               → Instalável, offline-first, notificações
-```
+| Tecnologia | Versão | Uso |
+|-----------|--------|-----|
+| React | 18 | Componentização e estados reativos |
+| Vite | 6 | Bundler e servidor de desenvolvimento |
+| React Router | 6 | Roteamento SPA |
+| Zustand | 5 | Estado global por slices |
+| Recharts | 2 | Gráficos de histórico |
+| Lucide React | latest | Ícones |
+| vite-plugin-pwa | latest | PWA / instalável / offline |
 
-### Back-end (MVP)
-```
-Node.js + Express → API REST para registros diários
-LocalStorage      → Persistência local (fase 1)
-Motor de Regras   → Verifica streaks → ARIAN_SILVER / ARIAN_GOLD
-```
+### Back-end
+| Tecnologia | Uso |
+|-----------|-----|
+| Supabase | Banco de dados PostgreSQL, Auth, RLS |
+| Supabase Auth | Cadastro, login e sessão do usuário |
 
-### Integrações (protótipo/mock)
+### Infraestrutura
+| Tecnologia | Uso |
+|-----------|-----|
+| Vercel | Hospedagem do front-end (deploy automático via GitHub) |
+| Docker + Nginx | Build alternativo para ambiente local / self-hosted |
+
+---
+
+## Estrutura do Projeto
+
 ```
-setInterval mock  → Simulação de dados de smartwatch
-HealthKit mock    → Sincronização passiva simulada
-Google Fit mock   → Integração futura
+ARION-Health/
+├── public/
+│   └── assets/
+│       ├── zebra.png            # Imagem do painel de cadastro/login
+│       ├── favicon-192.png      # PWA icon
+│       └── favicon-512.png      # PWA icon
+│
+├── src/
+│   ├── components/
+│   │   ├── gamification/
+│   │   │   ├── BadgeGrid/       # Grade de conquistas
+│   │   │   └── StreakCounter/   # Contador de dias consecutivos
+│   │   │
+│   │   ├── layout/
+│   │   │   ├── AppShell/        # Shell principal com navegação
+│   │   │   ├── Header/          # Cabeçalho com logo e ArianStar
+│   │   │   ├── SubTabNav/       # Abas secundárias de módulos
+│   │   │   └── TopNav/          # Navegação principal superior
+│   │   │
+│   │   ├── tracking/
+│   │   │   ├── AnnotationsTracker/  # Anotações e gatilhos
+│   │   │   ├── PanTrackerCard/      # Tracker de dor
+│   │   │   └── SymptomsTracker/     # Tracker de sintomas raros
+│   │   │
+│   │   └── ui/
+│   │       ├── ArianStar/           # Estrela de streak ativa
+│   │       ├── CircularGauge/       # Gauge circular animado
+│   │       ├── MoodPicker/          # Seletor de humor/estado
+│   │       ├── PercentSlider/       # Slider de 0–100%
+│   │       ├── ProgressStepper/     # Stepper de progresso
+│   │       ├── QuickPicker/         # Botões de seleção rápida
+│   │       └── SemaphoreIndicator/  # Indicador semáforo (dot colorido)
+│   │
+│   ├── hooks/
+│   │   ├── useAuth.js           # Cadastro, login, logout via Supabase
+│   │   └── useStreak.js         # Lógica de streak e gamificação
+│   │
+│   ├── lib/
+│   │   └── supabase.js          # Cliente Supabase configurado
+│   │
+│   ├── pages/
+│   │   ├── Register.jsx         # Tela de cadastro
+│   │   ├── Login.jsx            # Tela de login
+│   │   ├── Onboarding.jsx       # Onboarding inicial
+│   │   ├── Registro.jsx         # Dashboard de registro diário
+│   │   ├── History.jsx          # Histórico e linha do tempo
+│   │   ├── HistoryCharts.jsx    # Gráficos de evolução
+│   │   ├── Consultas.jsx        # Gestão de consultas médicas
+│   │   ├── Medicamentos.jsx     # Controle de medicamentos
+│   │   ├── Recomendacoes.jsx    # Recomendações personalizadas
+│   │   ├── Profile.jsx          # Perfil e configurações
+│   │   └── Export.jsx           # Exportar relatório para médico
+│   │
+│   ├── store/
+│   │   ├── useStore.js          # Store Zustand principal
+│   │   └── slices/
+│   │       ├── authSlice.js
+│   │       ├── checkInSlice.js
+│   │       ├── historySlice.js
+│   │       ├── profileSlice.js
+│   │       ├── streakSlice.js
+│   │       ├── smartwatchSlice.js
+│   │       └── accessibilitySlice.js
+│   │
+│   ├── utils/
+│   │   ├── constants.js         # Constantes globais
+│   │   ├── export.js            # Geração de relatório
+│   │   ├── gamification.js      # Motor de regras: streak, badges
+│   │   ├── persistence.js       # Helpers de persistência
+│   │   └── semaphore.js         # Lógica de cores por valores
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── supabase/
+│   └── schema.sql               # Schema do banco de dados
+│
+├── .env.example                 # Template de variáveis de ambiente
+├── Dockerfile                   # Build multi-stage (Node → Nginx)
+├── docker-compose.yml           # Orquestração local com variáveis
+├── nginx.conf                   # Configuração Nginx para SPA
+├── vercel.json                  # Configuração de deploy na Vercel
+└── package.json
 ```
 
 ---
 
-## Persona Central: Mariana
+## Configuração e Desenvolvimento
 
-```
-Idade: 28 anos | São Paulo
-Profissão: Fisioterapeuta e Recepcionista
-Condições: SED, Fibromialgia, SAMA, Disautonomia
-Tech level: Baixo/moderado
+### Pré-requisitos
+- Node.js 20+
+- Conta no [Supabase](https://supabase.com)
+
+### 1. Clonar e instalar
+
+```bash
+git clone https://github.com/Fedizko/ARION-Health.git
+cd ARION-Health
+npm install
 ```
 
-**Dores principais:**
-- Fadiga crônica — o app precisa ser extremamente rápido
-- Múltiplas patologias simultâneas para monitorar
-- Precisa levar dados visuais organizados para vários especialistas
+### 2. Configurar variáveis de ambiente
+
+```bash
+cp .env.example .env
+```
+
+Edite `.env` com suas credenciais do Supabase:
+
+```env
+VITE_SUPABASE_URL=https://seu-projeto.supabase.co
+VITE_SUPABASE_ANON_KEY=sua-anon-key
+```
+
+### 3. Criar schema no banco
+
+No painel do Supabase, acesse **SQL Editor** e execute o conteúdo de `supabase/schema.sql`.
+
+### 4. Iniciar em desenvolvimento
+
+```bash
+npm run dev
+```
+
+---
+
+## Deploy
+
+### Vercel (recomendado)
+
+O projeto possui `vercel.json` configurado. Para fazer deploy:
+
+1. Importe o repositório em [vercel.com/new](https://vercel.com/new)
+2. Adicione as variáveis de ambiente no painel da Vercel:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+3. Clique em **Deploy**
+
+A partir daí, **cada `git push origin master` dispara um novo deploy automaticamente**.
+
+### Docker (self-hosted)
+
+```bash
+# Build e subir
+docker compose up --build -d
+
+# Acessar em http://localhost:3000
+```
+
+As variáveis de ambiente são lidas do `.env` e passadas como build args para o Vite.
 
 ---
 
@@ -105,155 +247,39 @@ Tech level: Baixo/moderado
 --font-body:    'DM Sans', sans-serif  /* Corpo, labels */
 ```
 
-### Animações
+---
 
-```css
-/* Arian Glow — brilho prateado ao atingir streak */
-@keyframes arianGlow {
-  0%, 100% { box-shadow: 0 0 8px rgba(192,192,192,0.4); }
-  50%       { box-shadow: 0 0 24px rgba(192,192,192,0.9), 
-                           0 0 48px rgba(192,192,192,0.4); }
-}
+## Persona Central: Mariana
 
-/* Semáforo pulse — feedback ao registrar */
-@keyframes statusPulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
 ```
+Idade: 28 anos | São Paulo
+Profissão: Fisioterapeuta e Recepcionista
+Condições: SED, Fibromialgia, SAMA, Disautonomia
+Tech level: Baixo/moderado
+```
+
+**Dores principais:**
+- Fadiga crônica — o app precisa ser extremamente rápido
+- Múltiplas patologias simultâneas para monitorar
+- Precisa levar dados visuais organizados para vários especialistas
 
 ---
 
-## Estrutura do Projeto
+## Acessibilidade
 
-```
-arian-health/
-├── public/
-│   ├── favicon.ico            # Ícone 4 pétalas neon
-│   ├── manifest.json          # PWA manifest
-│   └── assets/
-│       ├── logo-accent.png    # Logo fundo neon
-│       ├── logo-branco.png    # Logo branco
-│       └── logo-preto.png     # Logo preto
-│
-├── src/
-│   ├── components/
-│   │   ├── layout/
-│   │   │   ├── AppShell.jsx       # Shell principal, nav, layout
-│   │   │   ├── BottomNav.jsx      # Navegação mobile
-│   │   │   └── Header.jsx         # Cabeçalho com logo
-│   │   │
-│   │   ├── dashboard/
-│   │   │   ├── StatusCard.jsx     # Card semáforo principal
-│   │   │   ├── ModuleGrid.jsx     # Grid 4 módulos (pétalas)
-│   │   │   ├── ModuleCard.jsx     # Card individual de módulo
-│   │   │   └── QuickCheckIn.jsx   # Check-in rápido 1-tap
-│   │   │
-│   │   ├── tracking/
-│   │   │   ├── PainTracker.jsx    # Módulo dor/articulações
-│   │   │   ├── HeartTracker.jsx   # Módulo cardíaco
-│   │   │   ├── RareTracker.jsx    # Módulo doenças raras
-│   │   │   └── EnergyTracker.jsx  # Módulo energia/fadiga
-│   │   │
-│   │   ├── gamification/
-│   │   │   ├── ArianStar.jsx      # Componente da estrela
-│   │   │   ├── StreakCounter.jsx  # Contador de dias consecutivos
-│   │   │   └── BadgeGrid.jsx      # Grade de conquistas
-│   │   │
-│   │   └── ui/
-│   │       ├── SemaphoreIndicator.jsx  # Dot colorido semáforo
-│   │       ├── ScaleInput.jsx          # Input escala 0–10
-│   │       ├── QuickPicker.jsx         # Botões de seleção rápida
-│   │       └── ExportButton.jsx        # Exportar para médico
-│   │
-│   ├── hooks/
-│   │   ├── useStreak.js       # Lógica de streak/gamificação
-│   │   ├── useCheckIn.js      # Lógica de check-in diário
-│   │   ├── useSemaphore.js    # Lógica de cores semáforo
-│   │   └── useSmartwatch.js   # Mock de dados wearable
-│   │
-│   ├── store/
-│   │   ├── useStore.js        # Estado global (Zustand ou Context)
-│   │   └── persistence.js     # LocalStorage helpers
-│   │
-│   ├── utils/
-│   │   ├── gamification.js    # Motor de regras: streak, badges
-│   │   ├── semaphore.js       # Lógica de cores por valores
-│   │   ├── export.js          # Geração de relatório PDF/imagem
-│   │   └── constants.js       # Constantes do projeto
-│   │
-│   ├── pages/
-│   │   ├── Home.jsx           # Dashboard principal
-│   │   ├── CheckIn.jsx        # Tela de check-in diário
-│   │   ├── History.jsx        # Histórico e gráficos
-│   │   ├── Profile.jsx        # Perfil e configurações
-│   │   └── Export.jsx         # Relatório para médico
-│   │
-│   ├── styles/
-│   │   ├── globals.css        # CSS variables, reset, base
-│   │   ├── animations.css     # Keyframes: arianGlow, etc.
-│   │   └── semaphore.css      # Classes utilitárias semáforo
-│   │
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── package.json
-├── vite.config.js
-├── README.md
-└── CLAUDE.md
-```
+- Inputs com área mínima de toque de **44×44px**
+- Contraste mínimo **4.5:1** (WCAG AA)
+- Navegação completa por **teclado**
+- Labels ARIA em todos os controles interativos
+- Fontes mínimas de **16px** para leitura fácil em fadiga
 
 ---
 
-## Instalação e Desenvolvimento
+## Contexto: A Zebra
 
-```bash
-# Instalar dependências
-npm install
+O símbolo da **zebra** representa a comunidade de doenças raras — baseado no ditado médico *"quando ouvir barulho de cascos, pense em cavalos, não em zebras"*. Pacientes com doenças raras **são** as zebras. O ARIAN foi construído por e para essa comunidade.
 
-# Iniciar servidor de desenvolvimento
-npm run dev
-
-# Build de produção
-npm run build
-
-# Preview do build
-npm run preview
-```
-
-### Dependências Principais
-
-```json
-{
-  "react": "^18.x",
-  "react-dom": "^18.x",
-  "react-router-dom": "^6.x",
-  "zustand": "^4.x",
-  "recharts": "^2.x",
-  "lucide-react": "^0.x",
-  "vite": "^5.x"
-}
-```
-
----
-
-## Hipóteses do Produto
-
-| # | Hipótese | Métricas |
-|---|----------|----------|
-| H1 | **Check-in de 3s** via widget one-tap aumenta retenção | DAU, taxa de check-in |
-| H2 | **Sync passiva** de smartwatch reduz esforço manual | % registros automáticos |
-| H3 | **Diário de Gatilhos** com ícones melhora adesão | entradas/semana |
-| H4 | **Arian Star** transforma monitoramento em validação emocional | streak médio, churn |
-
----
-
-## Contexto de Doenças Raras
-
-O símbolo da **zebra** 🦴 representa a comunidade de doenças raras — baseado no ditado médico *"quando ouvir barulho de cascos, pense em cavalos, não em zebras"*. Pacientes com doenças raras **são** as zebras. O ARIAN foi construído por e para essa comunidade.
-
-**Condições suportadas no MVP:**
+**Condições suportadas:**
 - Síndrome de Ehlers-Danlos (SED/EDS)
 - Fibromialgia
 - Síndrome de Ativação de Mastócitos (SAMA/MCAS)
@@ -262,18 +288,7 @@ O símbolo da **zebra** 🦴 representa a comunidade de doenças raras — basea
 
 ---
 
-## Acessibilidade
-
-- Inputs com área mínima de toque de **44×44px**
-- Contraste mínimo **4.5:1** (WCAG AA)
-- Suporte a **modo de alto contraste** do sistema
-- Navegação completa por **teclado**
-- Labels ARIA em todos os controles interativos
-- Fontes mínimas de **16px** para leitura fácil em fadiga
-
----
-
 ## Licença
 
-Projeto privado — MVP em desenvolvimento.  
-© 2025 ARIAN Health
+Projeto privado — em desenvolvimento ativo.
+© 2026 ARIAN Health
